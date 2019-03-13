@@ -37,8 +37,24 @@
     <hr />
 
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
+    <table th:if="${jobs} and ${jobs.size()}"  class = "job-listing">
+        <tr>
+            <th>Position Name</th>
+            <th>Position Type</th>
+            <th>Employer</th>
+            <th>Location</th>
+            <th>Skill</th>
+        </tr>
+        <tr th:each="job: ${jobs}">
+            <td th:each="category: ${job}" th:text="${category.value}"></td>
+        </tr>
+    </table>
+
+
+    <div th:unless="${jobs} and ${jobs.size()}">
+        There are no jobs for your search.
+    </div>
 
 </div>
-
 </body>
 </html>

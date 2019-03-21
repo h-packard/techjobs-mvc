@@ -35,21 +35,17 @@
     </form>
 
     <hr />
-
+    <div th:if="${jobs} and ${jobs.size()}" >
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
-    <table th:if="${jobs} and ${jobs.size()}"  class = "job-listing">
-        <tr>
-            <th>Position Name</th>
-            <th>Position Type</th>
-            <th>Employer</th>
-            <th>Location</th>
-            <th>Skill</th>
+    <table th:each="job: ${jobs}" class = "job-listing">
+        <tbody>
+        <tr  th:each="category: ${job}">
+            <td th:text="${#strings.capitalize(category.key)}"></td>
+            <td th:text="${#strings.capitalize(category.value)}"></td>
         </tr>
-        <tr th:each="job: ${jobs}">
-            <td th:each="category: ${job}" th:text="${category.value}"></td>
-        </tr>
+        </tbody>
     </table>
-
+    </div>
 
     <div th:unless="${jobs} and ${jobs.size()}">
         There are no jobs for your search.
